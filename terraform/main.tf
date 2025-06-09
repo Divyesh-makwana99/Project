@@ -22,7 +22,7 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "public_subnet2" {
     vpc_id = aws_vpc.project_vpc.id
     cidr_block = "10.0.3.0/24"
-    availability_zone = "ap-south-1c"
+    availability_zone = "ap-south-1b"
   
 }
 
@@ -76,6 +76,25 @@ resource "aws_vpc_security_group_egress_rule" "security_group_egress1" {
   
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 resource "aws_lb" "load_balancer" {
     name = "load-balancer-test"
     internal = false
@@ -117,23 +136,7 @@ resource "aws_lb_listener" "listener" {
     }
 }
 
-resource "tls_private_key" "private_key" {
-    algorithm = "RSA"
-    rsa_bits = 4096
-  
-}
 
-resource "aws_key_pair" "key_pair" {
-    key_name = "key-local"
-    public_key = tls_private_key.private_key.public_key_openssh
-  
-}
-
-output "my_private_key" {
-    value = tls_private_key.private_key.private_key_pem
-    sensitive = true
-  
-}
 
 resource "aws_autoscaling_group" "auto_scaling" {
     name = "autoscaling_demo"
@@ -152,7 +155,7 @@ resource "aws_autoscaling_group" "auto_scaling" {
     ]
 
     launch_template {
-      id = aws_launch_template.launch_template_custom.id
+      id = "${aws_launch_template.launch_template_custom.id}"
 
     }
   
@@ -179,14 +182,19 @@ resource "aws_launch_template" "launch_template_custom" {
     name = "launch_template_demo"
     key_name = aws_key_pair.key_pair.id
     instance_type = "t2.micro"
+    image_id = data.aws_ami.amazon_linux.id
 
-
-    network_interfaces {
-      associate_public_ip_address = true
-      security_groups = [aws_security_group.security_group.id]
-    }
+    # network_interfaces {
+    #   #device_index = 0
+    #   associate_public_ip_address = true
+    #   #security_groups = [aws_security_group.security_group.id]
+    # }
     
     vpc_security_group_ids = [aws_security_group.security_group.id]
+    
+    
+    
+    
     tag_specifications {
       resource_type = "instance"
 
@@ -228,3 +236,25 @@ resource "aws_launch_template" "launch_template_custom" {
 #     value = [for instance in aws_instance.instances1 : instance.public_ip]
   
 # }
+
+
+
+
+
+resource "tls_private_key" "private_key" {
+    algorithm = "RSA"
+    rsa_bits = 4096
+  
+}
+
+resource "aws_key_pair" "key_pair" {
+    key_name = "key-local"
+    public_key = tls_private_key.private_key.public_key_openssh
+  
+}
+
+output "my_private_key" {
+    value = tls_private_key.private_key.private_key_pem
+    sensitive = true
+  
+}
