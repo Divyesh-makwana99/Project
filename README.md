@@ -22,8 +22,7 @@
 
 - If a specific instance type is unavailable, change it in the Terraform variables.
 
-- This project is compatible with the AWS Free Tier, but be aware that public IPv4 addresses may incur charges if  
-  left  running.
+- This project is compatible with the AWS Free Tier, but be aware that public IPv4 addresses may incur charges if left  running.
 
 ## Instructions
 - Clone the repository:
