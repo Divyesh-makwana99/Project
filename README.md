@@ -25,19 +25,19 @@
 - This project is compatible with the AWS Free Tier, but be aware that public IPv4 addresses may incur charges if left  running.
 
 ## Instructions
-- Clone the repository:
-
+Clone the repository:
 - git clone https://github.com/Divyesh-makwana99/Project.git
 - cd terraform
-- Set up AWS credentials (ensure you have your AWS Access Key and Secret Key configured).
 
-- Initialize Terraform:
+**Set up AWS credentials** (ensure you have your AWS Access Key and Secret Key configured).
+
+Initialize Terraform:
 - terraform init
 
-- Review the plan:
+Review the plan:
 - terraform plan
 
-- Apply the infrastructure:
+Apply the infrastructure:
 - terraform apply
 - Approve the prompt with yes.
 
@@ -47,7 +47,7 @@
 - DNS name is listed as output for ipaddress in terraform outputs section.
 - Open your browser and go to: http://dns_address
 
-- Destroy resources when done:
+## Destroy resources when done:
 - terraform destroy
 - Confirm with yes.
 
@@ -55,5 +55,5 @@
 - terraform state list
 If resources are still listed, re-run terraform destroy.
 
-- - Do not manually delete or alter AWS resources created by Terraform. Always use terraform destroy for clean 
+- Do not manually delete or alter AWS resources created by Terraform. Always use terraform destroy for clean 
     teardown.
