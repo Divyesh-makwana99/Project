@@ -51,9 +51,9 @@ Apply the infrastructure:
 - terraform destroy
 - Confirm with yes.
 
-- Double-check cleanup:
+## Double-check cleanup:
 - terraform state list
-If resources are still listed, re-run terraform destroy.
+- If resources are still listed, re-run terraform destroy.
 
 - Do not manually delete or alter AWS resources created by Terraform. Always use terraform destroy for clean 
     teardown.
